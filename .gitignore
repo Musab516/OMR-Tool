@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual env
+venv/
+.env/
+
+# Output files
+results.xlsx
+mark_scheme.json
+
+# Images (optional)
+sheets/
+*.jpg
+*.png
+*.jpeg
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
