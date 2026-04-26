@@ -1,3 +1,6 @@
+Here is the updated `README.md` tailored exactly to the Python code we just built. It reflects the new CSV export system, the single-file Tkinter architecture, the new ERP extraction feature, and adds Emad Yar Khan to the team.
+
+```markdown
 # OMR Evaluation System
 
 A Python-based Optical Mark Recognition (OMR) application that automatically detects, extracts, and grades MCQ answer sheets and Student IDs (ERP) using computer vision.
@@ -37,3 +40,80 @@ OMR-Evaluation-System/
 ├── batch_results.csv    # Output from batch folder processing
 ├── README.md
 └── requirements.txt
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone [https://github.com/Musab516/OMR-Tool.git](https://github.com/Musab516/OMR-Tool.git)
+cd OMR-Tool
+```
+
+### 2. Install dependencies
+
+This project relies on OpenCV and NumPy. The Python `csv` and `tkinter` libraries are built-in, but Linux users may need to install the Tkinter system package.
+
+```bash
+pip install opencv-python numpy
+```
+
+*(For Linux/Ubuntu users only)*
+```bash
+sudo apt install python3-tk
+```
+
+---
+
+## ▶️ Usage
+
+Run the main application file to open the dashboard:
+
+```bash
+python main.py
+```
+
+### GUI Options:
+
+* **Step 1: Set Markscheme**
+  Opens a scrollable window to input the correct answers for Q1 to Q41. Saves to `markscheme.csv`.
+* **Step 2: Scan Single Sheet**
+  Select a single `.jpg` or `.png` file. It will display the warped image, overlay the extracted ERP, show the score in the UI, and generate a detailed `student_result.csv`.
+* **Step 3: Batch Process Folder**
+  Select a folder containing multiple OMR images. The tool will process all of them silently and output a compiled `batch_results.csv` containing filenames, ERPs, and scores.
+
+---
+
+## 📊 Output Formats
+
+**Single Scan (`student_result.csv`)**
+Provides a granular breakdown of a single student's test.
+*Columns: ERP, Question, Detected, Key, Result (Correct/Incorrect/Blank)*
+
+**Batch Processing (`batch_results.csv`)**
+Provides a master list of all students in a scanned folder.
+*Columns: Filename, ERP, Score (Correct), Wrong, Blank*
+
+---
+
+## 🚧 Calibration Notes
+
+If you are using a different physical OMR sheet design or a different camera, you may need to tweak the coordinate variables inside the `main.py` file. 
+* Look for the `=== CALIBRATION SETTINGS ===` blocks inside `extract_erp()` and `detect()` to adjust X/Y starting points and row/column gaps. 
+* Setting `draw_debug=True` will draw blue rectangles over the scanning zones to help you align them perfectly.
+
+---
+
+## 👥 Authors
+
+* **Musab Bin Majid**
+* **Emad Yar Khan**
+
+---
+
+## ⭐ If you like this project
+Give it a star on GitHub!
+```
