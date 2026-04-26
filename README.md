@@ -1,6 +1,3 @@
-Here is the updated `README.md` tailored exactly to the Python code we just built. It reflects the new CSV export system, the single-file Tkinter architecture, the new ERP extraction feature, and adds Emad Yar Khan to the team.
-
-```markdown
 # OMR Evaluation System
 
 A Python-based Optical Mark Recognition (OMR) application that automatically detects, extracts, and grades MCQ answer sheets and Student IDs (ERP) using computer vision.
@@ -24,7 +21,7 @@ A Python-based Optical Mark Recognition (OMR) application that automatically det
 1. **Image Preprocessing:** Converts the image to grayscale, applies Gaussian blur, and uses adaptive thresholding.
 2. **Perspective Warping:** Finds the 4 largest corners of the OMR boundary and warps the image into a perfect 800x1000 top-down view.
 3. **ERP Extraction:** Scans a calibrated 10x5 coordinate grid (with split-gap logic) to extract the student's 5-digit ID.
-4. **Answer Extraction:** Scans the Left (Q1-21) and Right (Q22-41) columns, measuring the pixel density (`cv2.countNonZero`) of each bubble to find the darkest option.
+4. **Answer Extraction:** Scans the Left (Q1–21) and Right (Q22–41) columns, measuring the pixel density (`cv2.countNonZero`) of each bubble to find the darkest option.
 5. **Evaluation:** Compares the detected answers against the saved `markscheme.csv` and calculates Correct, Incorrect, and Blank totals.
 
 ---
@@ -49,7 +46,7 @@ OMR-Evaluation-System/
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/Musab516/OMR-Tool.git](https://github.com/Musab516/OMR-Tool.git)
+git clone https://github.com/Musab516/OMR-Tool.git
 cd OMR-Tool
 ```
 
@@ -62,6 +59,7 @@ pip install opencv-python numpy
 ```
 
 *(For Linux/Ubuntu users only)*
+
 ```bash
 sudo apt install python3-tk
 ```
@@ -76,33 +74,38 @@ Run the main application file to open the dashboard:
 python main.py
 ```
 
-### GUI Options:
+### GUI Options
 
-* **Step 1: Set Markscheme**
+* **Step 1: Set Markscheme**  
   Opens a scrollable window to input the correct answers for Q1 to Q41. Saves to `markscheme.csv`.
-* **Step 2: Scan Single Sheet**
+
+* **Step 2: Scan Single Sheet**  
   Select a single `.jpg` or `.png` file. It will display the warped image, overlay the extracted ERP, show the score in the UI, and generate a detailed `student_result.csv`.
-* **Step 3: Batch Process Folder**
+
+* **Step 3: Batch Process Folder**  
   Select a folder containing multiple OMR images. The tool will process all of them silently and output a compiled `batch_results.csv` containing filenames, ERPs, and scores.
 
 ---
 
 ## 📊 Output Formats
 
-**Single Scan (`student_result.csv`)**
+### Single Scan (`student_result.csv`)
 Provides a granular breakdown of a single student's test.
-*Columns: ERP, Question, Detected, Key, Result (Correct/Incorrect/Blank)*
 
-**Batch Processing (`batch_results.csv`)**
+**Columns:** ERP, Question, Detected, Key, Result (Correct/Incorrect/Blank)
+
+### Batch Processing (`batch_results.csv`)
 Provides a master list of all students in a scanned folder.
-*Columns: Filename, ERP, Score (Correct), Wrong, Blank*
+
+**Columns:** Filename, ERP, Score (Correct), Wrong, Blank
 
 ---
 
 ## 🚧 Calibration Notes
 
-If you are using a different physical OMR sheet design or a different camera, you may need to tweak the coordinate variables inside the `main.py` file. 
-* Look for the `=== CALIBRATION SETTINGS ===` blocks inside `extract_erp()` and `detect()` to adjust X/Y starting points and row/column gaps. 
+If you are using a different physical OMR sheet design or a different camera, you may need to tweak the coordinate variables inside the `main.py` file.
+
+* Look for the `=== CALIBRATION SETTINGS ===` blocks inside `extract_erp()` and `detect()` to adjust X/Y starting points and row/column gaps.  
 * Setting `draw_debug=True` will draw blue rectangles over the scanning zones to help you align them perfectly.
 
 ---
@@ -115,5 +118,5 @@ If you are using a different physical OMR sheet design or a different camera, yo
 ---
 
 ## ⭐ If you like this project
+
 Give it a star on GitHub!
-```
