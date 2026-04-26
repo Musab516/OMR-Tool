@@ -1,138 +1,39 @@
-# OMR Auto Grading Tool
+# OMR Evaluation System
 
-A Python-based Optical Mark Recognition (OMR) system that automatically detects and grades MCQ answer sheets using computer vision.
+A Python-based Optical Mark Recognition (OMR) application that automatically detects, extracts, and grades MCQ answer sheets and Student IDs (ERP) using computer vision.
 
 ---
 
 ## 🚀 Features
 
-* Detects answers from scanned or photographed MCQ sheets
-* Supports **cross-marked answers** (not just filled bubbles)
-* Automatic grading using a custom mark scheme
-* Batch processing of multiple sheets
-* Excel export of results
-* Simple GUI for easy use
+* **Smart Document Alignment:** Uses OpenCV contour detection and perspective transformation to automatically warp and flatten photographed or scanned sheets.
+* **ERP / Student ID Extraction:** Accurately reads 5-digit student roll numbers from complex, split-grid bubble layouts.
+* **Accurate Grading:** Detects answers for up to 41 questions (Options A, B, C, D) using pixel darkness thresholds.
+* **Interactive GUI:** Built-in Tkinter dashboard for easy operation without using the command line.
+* **Markscheme Editor:** Scrollable, interactive UI to set and save the correct answer key.
+* **Batch Processing:** Automatically process an entire folder of scanned OMR sheets in seconds.
+* **CSV Exports:** Automatically generates detailed `student_result.csv` for single scans and a master `batch_results.csv` for folder processing.
 
 ---
 
 ## 🧠 How It Works
 
-1. Image preprocessing (grayscale, thresholding)
-2. Detection of answer boxes using contours
-3. Extraction of answer column
-4. Grouping boxes into questions
-5. Adaptive answer detection using image analysis
-6. Comparison with mark scheme for grading
-
----
-
-## 🖥️ GUI Overview
-
-* Create mark scheme using clickable interface
-* Grade single image instantly
-* Grade multiple sheets (batch mode)
-* Export results to Excel
+1. **Image Preprocessing:** Converts the image to grayscale, applies Gaussian blur, and uses adaptive thresholding.
+2. **Perspective Warping:** Finds the 4 largest corners of the OMR boundary and warps the image into a perfect 800x1000 top-down view.
+3. **ERP Extraction:** Scans a calibrated 10x5 coordinate grid (with split-gap logic) to extract the student's 5-digit ID.
+4. **Answer Extraction:** Scans the Left (Q1-21) and Right (Q22-41) columns, measuring the pixel density (`cv2.countNonZero`) of each bubble to find the darkest option.
+5. **Evaluation:** Compares the detected answers against the saved `markscheme.csv` and calculates Correct, Incorrect, and Blank totals.
 
 ---
 
 ## 📁 Project Structure
 
-```
-OMR-Tool/
+```text
+OMR-Evaluation-System/
 │
-├── preprocess.py        # Image preprocessing
-├── detect.py            # Detection and answer extraction
-├── main.py              # Core pipeline
-├── app.py               # GUI application
-├── gui_markscheme.py    # Mark scheme creator
+├── main.py              # Main application script (GUI + OMR Logic)
+├── markscheme.csv       # Automatically generated answer key file
+├── student_result.csv   # Output from a single sheet scan
+├── batch_results.csv    # Output from batch folder processing
 ├── README.md
 └── requirements.txt
-```
-
----
-
-## ⚙️ Installation
-
-### 1. Clone the repository
-
-```
-git clone https://github.com/Musab516/OMR-Tool.git
-cd OMR-Tool
-```
-
-### 2. Install dependencies
-
-```
-pip install opencv-python openpyxl
-sudo apt install python3-tk
-```
-
----
-
-## ▶️ Usage
-
-### Create Mark Scheme
-
-```
-python3 gui_markscheme.py
-```
-
-Select correct answers and save.
-
----
-
-### Run GUI Application
-
-```
-python3 app.py
-```
-
-Options:
-
-* Grade single image
-* Grade folder (batch mode)
-
----
-
-## 📊 Output
-
-* Instant result popup (single image)
-* `results.xlsx` for batch grading
-
----
-
-## 🔧 Example
-
-```
-Detected answers: [1, 1]
-Score: 2/2
-```
-
----
-
-## 🚧 Limitations
-
-* Uses a fixed threshold (`y > 250`) for header removal
-* Works best with consistent sheet format
-
----
-
-## 🚀 Future Improvements
-
-* Automatic header detection (remove hardcoding)
-* Student ID recognition
-* Improved UI design
-* PDF support
-* Better layout adaptability
-
----
-
-## 👤 Author
-
-Musab Bin Majid
-
----
-
-## ⭐ If you like this project
-
-Give it a star on GitHub!
