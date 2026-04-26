@@ -120,3 +120,6 @@ If you are using a different physical OMR sheet design or a different camera, yo
 ## ⭐ If you like this project
 
 Give it a star on GitHub!
+
+## 📜 License
+This project is licensed under the MIT License.
